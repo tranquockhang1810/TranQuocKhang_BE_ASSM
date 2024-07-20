@@ -7,24 +7,38 @@ const swaggerDefinition = {
   info: {
     title: 'Trần Quốc Khang - BE ASSIGNMENT',
     version: '1.0.0',
-    description: 'BE Assignment: Tài liệu API của hệ thống trang web thương mại điện tử',
+    description: 'BE Assignment: APIs document of an E-commerce web application',
   },
   servers: [
-    {
-      url: 'http://localhost:8080',
-      description: 'Development server',
-    },
     // {
     //   url: 'https://be-lab-socialapp.onrender.com/',
     //   description: 'Production server',
     // },
+    {
+      url: 'http://localhost:8080',
+      description: 'Development server',
+    },
+  ],
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+      },
+    },
+  },
+  security: [
+    {
+      bearerAuth: [],
+    },
   ],
 };
 
 // Options for the swagger docs
 const options = {
   swaggerDefinition,
-  apis: ['../routes/**/*.js', '../models/*.js'], // Path to the API docs
+  apis: ['./src/routes/**/*.js', './src/models/*.js'], // Path to the API docs
 };
 
 // Initialize swagger-jsdoc
