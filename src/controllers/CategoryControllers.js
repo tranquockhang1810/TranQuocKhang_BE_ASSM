@@ -1,4 +1,5 @@
 const Category = require("../models/Category.Model");
+const Product = require("../models/Product.Model");
 
 // Get all categories
 exports.getCategories = async (req, res, next) => {
@@ -76,6 +77,8 @@ exports.deleteCategory = async (req, res, next) => {
     if (!category) {
       return next({ status: 404, message: "Category not found" });
     }
+    //Delete products
+    await Product.deleteMany({ category: id });
     res.status(200).json({
       data: category,
       message: "Delete category successfully",
