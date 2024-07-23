@@ -10,10 +10,10 @@ const swaggerDefinition = {
     description: 'BE Assignment: APIs document of an E-commerce web application',
   },
   servers: [
-    // {
-    //   url: 'https://be-lab-socialapp.onrender.com/',
-    //   description: 'Production server',
-    // },
+    {
+      url: 'https://tranquockhang-be-assm.onrender.com',
+      description: 'Production server',
+    },
     {
       url: 'http://localhost:8080',
       description: 'Development server',
