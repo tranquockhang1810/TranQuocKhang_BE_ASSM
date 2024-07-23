@@ -69,7 +69,14 @@ exports.getProductById = async (req, res, next) => {
 exports.createProduct = async (req, res, next) => {
   try {
     const { name, price, category, description, images, variants } = req.body;
-    const product = new Product({ name, price, category, description, images, variants });
+
+    // Sum the quantity of colors for each variant size
+    const updatedVariants = variants.map(variant => {
+      const totalQuantity = variant.color.reduce((sum, color) => sum + color.quantity, 0);
+      return { ...variant, quantity: totalQuantity };
+    });
+
+    const product = new Product({ name, price, category, description, images, variants: updatedVariants });
     await product.save();
     res.status(201).json({
       data: product,
@@ -85,7 +92,14 @@ exports.updateProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name, category, description, images, variants } = req.body;
-    const product = await Product.findOneAndUpdate({ _id: id }, { name, category, description, images, variants }, { new: true });
+
+    // Sum the quantity of colors for each variant size
+    const updatedVariants = variants.map(variant => {
+      const totalQuantity = variant.color.reduce((sum, color) => sum + color.quantity, 0);
+      return { ...variant, quantity: totalQuantity };
+    });
+
+    const product = await Product.findOneAndUpdate({ _id: id }, { name, category, description, images, variants: updatedVariants }, { new: true });
     if (!product) {
       return next({ status: 404, message: "Product not found" });
     }

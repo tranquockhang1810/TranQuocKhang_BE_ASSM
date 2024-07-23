@@ -135,8 +135,6 @@ router.get("/:id", auth, getProductById);
  *                             type: string
  *                           quantity:
  *                             type: number
- *                     quantity:
- *                       type: number
  *     responses:
  *       201:
  *         description: The product was successfully created
@@ -190,9 +188,16 @@ router.post("/", auth, createProduct);
  *                     size:
  *                       type: string
  *                     color:
- *                       type: string
- *                     quantity:
- *                       type: number
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           name:
+ *                             type: string
+ *                           code:
+ *                             type: string
+ *                           quantity:
+ *                             type: number
  *     responses:
  *       200:
  *         description: The product was successfully updated
