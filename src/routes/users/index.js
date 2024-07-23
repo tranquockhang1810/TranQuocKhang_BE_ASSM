@@ -25,7 +25,7 @@ const auth = require("../../middleware/auth");
  *           type: integer
  *         default: 10
  *       - in: query
- *         name: name
+ *         name: fullName
  *         schema:
  *           type: string
  *       - in: query
